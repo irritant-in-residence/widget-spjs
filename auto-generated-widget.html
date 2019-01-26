@@ -246,7 +246,7 @@ requirejs.config({
 });
 
 // Test this element. This code is auto-removed by the chilipeppr.load()
-cprequire_test(["inline:com-chilipeppr-widget-serialport"], function (sp) {
+cprequire_test(["inline:com-pymonster-widget-pymonster"], function (sp) {
     console.log("test running of " + sp.id);
     
     $('body').css("padding", "20px");
@@ -289,7 +289,7 @@ cprequire_test(["inline:com-chilipeppr-widget-serialport"], function (sp) {
     //test2()
 
     setTimeout(function() {
-        chilipeppr.publish("/com-chilipeppr-widget-serialport/requestSingleSelectPort", "");
+        chilipeppr.publish("/com-pymonster-widget-pymonster/requestSingleSelectPort", "");
     }, 2000);
     
     /*
@@ -305,7 +305,7 @@ cprequire_test(["inline:com-chilipeppr-widget-serialport"], function (sp) {
     
     var testProgrammer = function() {
         var testProgrammerDiv = $("<div></div>").attr("id", "com-chilipeppr-widget-programmer-div");
-        $('#com-chilipeppr-widget-serialport').append(testProgrammerDiv);
+        $('#com-pymonster-widget-pymonster').append(testProgrammerDiv);
         
         // Programmer
         // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
@@ -318,14 +318,14 @@ cprequire_test(["inline:com-chilipeppr-widget-serialport"], function (sp) {
     
     var testFro = function() {
         setTimeout(function() {
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/requestFro", "3.5");
+            chilipeppr.publish("/com-pymonster-widget-pymonster/requestFro", "3.5");
         }, 3000);
     }
     testFro();
     
     var testStatus = function() {
         setTimeout(function() {
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/requestStatus", "3.5");
+            chilipeppr.publish("/com-pymonster-widget-pymonster/requestStatus", "3.5");
         }, 6000);
     }
     testStatus();
@@ -354,15 +354,15 @@ cprequire_test(["inline:com-chilipeppr-widget-serialport"], function (sp) {
 
 } /*end_test*/ );
 
-cpdefine("inline:com-chilipeppr-widget-serialport", ["chilipeppr_ready", "jquerycookie"], function () {
+cpdefine("inline:com-pymonster-widget-pymonster", ["chilipeppr_ready", "jquerycookie"], function () {
     return {
-        id: "com-chilipeppr-widget-serialport",
+        id: "com-pymonster-widget-pymonster",
         name: "Widget / Serial Port JSON Server",
         desc: "The essential widget if you want your workspace to talk to the Serial Port JSON Server (SPJS). This widget enables numerous pubsub signals so you can publish to SPJS and receive data back when you subscribe to the appropriate signals.",
-        url: "http://raw.githubusercontent.com/chilipeppr/widget-spjs/master/auto-generated-widget.html",       // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
-        fiddleurl: "http://ide.c9.io/chilipeppr/widget-spjs", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
-        githuburl: "http://github.com/chilipeppr/widget-spjs", // The backing github repo
-        testurl: "http://widget-spjs-chilipeppr.c9users.io/widget.html",   // The standalone working widget so can view it working by itself
+        url: "http://raw.githubusercontent.com/https://master/auto-generated-widget.html",       // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
+        fiddleurl: "http://ide.c9.io/undefined/undefined", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
+        githuburl: "http://github.com/https:/", // The backing github repo
+        testurl: "http://undefined-undefined.c9users.io/widget.html",   // The standalone working widget so can view it working by itself
         publish: {
             '/list' : "Sends the list of serial ports shown in this widget including the connect state so other widgets/elements in ChiliPeppr can use the list including knowing what serial ports to send/recv from. Send in /getList and get back a /list with the JSON payload of the list.", 
             '/listAfterMetaDataAdded' : "Similar to /list but the list will have meta data added to it like an image, or default baud rates, or a modified friendly name. It may even be marked as deleted for dual port scenarios where a port may be considered the 2nd port.", 
@@ -406,10 +406,10 @@ docs for all support SPJS commands on Github at
 <a target="_blank" href="https://github.com/chilipeppr/serial-port-json-server#supported-commands">https://github.com/chilipeppr/serial-port-json-server#supported-commands</a>.
 <br><br>
 Example<br>
-chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "send COM22 G0 X0\\n");
+chilipeppr.publish("/com-pymonster-widget-pymonster/ws/send", "send COM22 G0 X0\\n");
 <br><br>
 Example of sending non-buffered command<br>
-chilipeppr.publish("/com-chilipeppr-widget-serialport/ws/send", "sendnobuf /dev/ttyUSB0 M3 S1000\\n");
+chilipeppr.publish("/com-pymonster-widget-pymonster/ws/send", "sendnobuf /dev/ttyUSB0 M3 S1000\\n");
 `,
             '/send' : `This widget subscribes to this signal whereby you can simply send 
 to this pubsub channel (instead of /ws/send which is lower level) and the widget will
@@ -418,7 +418,7 @@ Most serial devices expect newline characters, so you should send those in your 
 this pubsub channel does not add them.
 <br><br>
 Example<br>
-chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
+chilipeppr.publish("/com-pymonster-widget-pymonster/send", "G1 X10 F500\\n");
 `,
             '/jsonSend' : '<p>This signal is like /send but a more structured version where you can send us commands like {"D": "G0 X1\n", "Id":"123"} or an array like [{"D": "G0 X1\n", "Id":"123"}, {"D": "G0 X2\n", "Id":"124"}] and then this widget will send callback signals in order of /onQueue, /onWrite, /onComplete. The payload is {"Id":"123"} on each of those.</p> <p>The SPJS has 3 steps to get your command to the serial device. Step 1 is /onQueue and this will come back immediately when SPJS has taken your command and queued it to memory/disk. Step 2 is /onWrite when SPJS actually has written your command to the serial device. If the device takes a while to execute the command it could be a bit of time until that command is physically executed. Step 3 is /onComplete which is SPJS attempting to watch for a response from the serial device to determine that indeed your command is executed. Please note /onComplete can come back prior to /onWrite based on your serial device and how fast it may have executed your serial command.</p> <p>You can omit the Id if you do not care about tracking. You will get callbacks with an empty Id so you will not be able to match them up. If you send in /jsonSend {"D": "G0 X1\nG0 X0\n", "Id":"123"} you will get back /onQueue [{"D":"G0 X1\n","Id":"123","Buf":"Buf"},{"D":"G0 X0\n","Id":"123-part-2-2","Buf":"Buf"}] because technically those are 2 commands with one Id. Some commands sent into Serial Port JSON Server get additional commands auto-added. For example, if you send in a command to TinyG that would put it in text mode, SPJS appends a command to put TinyG back in JSON mode. In those cases you will get parts added to your command and will see that in the response.</p>',
             '/getlist' : "In case any other widget/element wants to request the list at any time, they can send a signal to this channel and we'll respond back with a /list",
@@ -502,13 +502,13 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     mydescription = buffertypeDescription;
                 }
                 // also add extra msg to encourage the buffer choice
-                $('.com-chilipeppr-widget-serialport-bufferindicator').removeClass("hidden").find('.buffername').text(mydescription);
+                $('.com-pymonster-widget-pymonster-bufferindicator').removeClass("hidden").find('.buffername').text(mydescription);
                 
                 // set the buffer encouragement to be the full passed in
                 // description if the caller called us with the new defaultOptions
                 // value
                 if (this.defaultOptions && 'bufferEncouragementMsg' in this.defaultOptions) {
-                  $('.com-chilipeppr-widget-serialport-bufferindicator').text(
+                  $('.com-pymonster-widget-pymonster-bufferindicator').text(
                     this.defaultOptions.bufferEncouragementMsg
                   );
                 }
@@ -583,25 +583,25 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             if ($.cookie('lasthost')) {
                 var lasthost = $.cookie('lasthost');
                 lasthost = lasthost.replace(/ws:\/\/(.*):.*/, "$1");
-                $('#com-chilipeppr-widget-serialport-host').val(lasthost);
+                $('#com-pymonster-widget-pymonster-host').val(lasthost);
             }
             
             // setup convenience localhost href click
             $('.spjs-connect2localhost').click(function() {
-                $('#com-chilipeppr-widget-serialport-host').val("localhost");
+                $('#com-pymonster-widget-pymonster-host').val("localhost");
                 that.onRemoteHostConnect();
             });
             $('.spjs-connect2localhostSSL').click(function() {
-                $('#com-chilipeppr-widget-serialport-host').val("wss://localhost:8990/ws");
+                $('#com-pymonster-widget-pymonster-host').val("wss://localhost:8990/ws");
                 that.onRemoteHostConnect();
             });
             
             // if connect btn or enter key on remote host connect
-            var remoteCon = $('#com-chilipeppr-widget-serialport-hostbtn');
+            var remoteCon = $('#com-pymonster-widget-pymonster-hostbtn');
             remoteCon.click(function() {
                 that.onRemoteHostConnect();
             });
-            $('#com-chilipeppr-widget-serialport-host').keypress(function(event){
+            $('#com-pymonster-widget-pymonster-host').keypress(function(event){
                 //console.log("got keypress. event:", event);
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode == '13'){
@@ -610,13 +610,13 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             });
             
             // setup the port scan button
-            $('#com-chilipeppr-widget-serialport-scanbtn').click(function() {
-                var subnet = $('#com-chilipeppr-widget-serialport-scan').val();
+            $('#com-pymonster-widget-pymonster-scanbtn').click(function() {
+                var subnet = $('#com-pymonster-widget-pymonster-scan').val();
                 that.wsScan(null, subnet);
             });
             
             // cleanup popovers that are getting created by some other widget's code
-            //$('.com-chilipeppr-widget-serialport').find('.popover').remove();
+            //$('.com-pymonster-widget-pymonster').find('.popover').remove();
             
             // setup requestSingleSelectPort pubsub event
             chilipeppr.subscribe("/" + this.id + "/requestSingleSelectPort", this, function (msg) {
@@ -663,22 +663,22 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                 console.log('my IP: ', myIP);
                 var subnet = myIP.replace(/\d+$/, "*");
                 console.log("my IP subnet:", subnet);
-                $('#com-chilipeppr-widget-serialport-scan').val(subnet);
+                $('#com-pymonster-widget-pymonster-scan').val(subnet);
                 pc.onicecandidate = noop;
             };    
         },
         setupRecentServerList: function() {
           var that = this;
-        	$('.com-chilipeppr-widget-serialport-install .btn-reset-recent-server-list').click(function() {
-            localStorage.setItem('com-chilipeppr-widget-serialport-serverList', null);
+        	$('.com-pymonster-widget-pymonster-install .btn-reset-recent-server-list').click(function() {
+            localStorage.setItem('com-pymonster-widget-pymonster-serverList', null);
             that.showRecentServerList();
           })
         },
         showRecentServerList: function() {
         	//debugger;
         	var serverList = this.serverListGet();
-          var elOuter = $('.com-chilipeppr-widget-serialport-install .recent-server-list-wrapper');
-          var el = $('.com-chilipeppr-widget-serialport-install .recent-server-list');
+          var elOuter = $('.com-pymonster-widget-pymonster-install .recent-server-list-wrapper');
+          var el = $('.com-pymonster-widget-pymonster-install .recent-server-list');
           var that = this;
           console.log("showRecentServerList:", serverList)
           if (serverList && Object.keys(serverList).length > 0) {
@@ -720,7 +720,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             if (payload) {
                 multiplier = payload;
             }
-            chilipeppr.publish('/com-chilipeppr-widget-serialport/ws/send', 'fro ' + this.singleSelectPort + " " + multiplier + "\n");
+            chilipeppr.publish('/com-pymonster-widget-pymonster/ws/send', 'fro ' + this.singleSelectPort + " " + multiplier + "\n");
         },
         version: null,
         versionFloat: 0.0,
@@ -735,66 +735,66 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             console.log("got version cmd. version:", version);
             this.version = version;
             this.versionFloat = parseFloat(version);
-            $('.com-chilipeppr-widget-serialport .serial-port-version').text(" v" + version + " ");
+            $('.com-pymonster-widget-pymonster .serial-port-version').text(" v" + version + " ");
             
             // Handle functionality buttons show/hidden based on version here
             if ( this.versionFloat >= 1.76) {
                 // show restart button
-                 $('.com-chilipeppr-widget-serialport .btn.spjs-restart').parent().removeClass("hidden");
+                 $('.com-pymonster-widget-pymonster .btn.spjs-restart').parent().removeClass("hidden");
             } else {
                 // hide restart button
-                 $('.com-chilipeppr-widget-serialport .btn.spjs-restart').parent().addClass("hidden");
+                 $('.com-pymonster-widget-pymonster .btn.spjs-restart').parent().addClass("hidden");
             }
             
             
             // Handle informational message here
             if ( this.versionFloat >= 1.80) {
                 
-                $('.com-chilipeppr-widget-serialport-version-yours').text(version);
-                $('.com-chilipeppr-widget-serialport-version').addClass('hidden');
+                $('.com-pymonster-widget-pymonster-version-yours').text(version);
+                $('.com-pymonster-widget-pymonster-version').addClass('hidden');
                 
             } else if (version == "1.6" || version == "1.2" || version == "1.3" || version == "1.3.1" || version == "1.4" || version == "1.5" || version == "snapshot") {
                 
-                $('.com-chilipeppr-widget-serialport-version-yours').text(version);
-                //$('.com-chilipeppr-widget-serialport-version').addClass('hidden');
-                $('.com-chilipeppr-widget-serialport-version-fullmsg').html(
+                $('.com-pymonster-widget-pymonster-version-yours').text(version);
+                //$('.com-pymonster-widget-pymonster-version').addClass('hidden');
+                $('.com-pymonster-widget-pymonster-version-fullmsg').html(
                     "You are running version " + version + " of the Serial Port JSON Server. You MUST upgrade to the new 1.7 version as the Serial Port JSON Server has moved to a more stuctured send to enable onQueue, onWrite, and OnComplete events.<br/><br/>To upgrade, " + 
                     '<button type="button" class="btn btn-xs btn-default disconnect-inline" data-toggle="popover" data-placement="auto" data-container="body" data-content="Disconnect from serial port server" data-trigger="hover" data-original-title="" title=""><span class="glyphicon glyphicon-remove-sign"></span></button>' +
                     " disconnect from the websocket server and click the correct platform to download the binary for.");
-                $('.com-chilipeppr-widget-serialport-version-fullmsg .disconnect-inline').click(this.disconnect.bind(this));
+                $('.com-pymonster-widget-pymonster-version-fullmsg .disconnect-inline').click(this.disconnect.bind(this));
                 /*
             } else if (version == "1.2") {
-                $('.com-chilipeppr-widget-serialport-version-fullmsg').html("You are running version 1.2 of the Serial Port JSON Server. If you are running a TinyG, you should upgrade to the new 1.6 version as the Serial Port JSON Server now supports buffer flow control plugins. A plugin has been written for TinyG that puts the control closer to the serial port to ensure no lost Gcode. If you are running an alternate workspace, you're all set, although you could still upgrade.<br/><br/>To upgrade, disconnect from the websocket server and click the correct platform to download the binary for.");
+                $('.com-pymonster-widget-pymonster-version-fullmsg').html("You are running version 1.2 of the Serial Port JSON Server. If you are running a TinyG, you should upgrade to the new 1.6 version as the Serial Port JSON Server now supports buffer flow control plugins. A plugin has been written for TinyG that puts the control closer to the serial port to ensure no lost Gcode. If you are running an alternate workspace, you're all set, although you could still upgrade.<br/><br/>To upgrade, disconnect from the websocket server and click the correct platform to download the binary for.");
                 */
             } else {
                 if (version != null && version != "")
-                    $('.com-chilipeppr-widget-serialport-version-yours').text(version);
-                $('.com-chilipeppr-widget-serialport-version').removeClass('hidden');
+                    $('.com-pymonster-widget-pymonster-version-yours').text(version);
+                $('.com-pymonster-widget-pymonster-version').removeClass('hidden');
             }
         },
         resetVersion: function() {
             // turn off the version msg in UI
             // to handle earlier versions that don't send a version num
             // default to always showing. then onVersion will hide for us
-            $('.com-chilipeppr-widget-serialport-version-yours').text("1.1");
+            $('.com-pymonster-widget-pymonster-version-yours').text("1.1");
             // no longer doing this as of Jan 25 2015 cuz version 1.1 is SOOOOO old nobody
             // has it anymore
-            //$('.com-chilipeppr-widget-serialport-version').removeClass('hidden');            
+            //$('.com-pymonster-widget-pymonster-version').removeClass('hidden');            
         },
         hideVersion: function() {
-            $('.com-chilipeppr-widget-serialport-version').addClass('hidden');
-            $('.com-chilipeppr-widget-serialport .panel-heading .serial-port-version').text('');
+            $('.com-pymonster-widget-pymonster-version').addClass('hidden');
+            $('.com-pymonster-widget-pymonster .panel-heading .serial-port-version').text('');
         },
         resetSpjsName: function() {
-            $('.com-chilipeppr-widget-serialport .panel-heading .hosttitle').text('');
+            $('.com-pymonster-widget-pymonster .panel-heading .hosttitle').text('');
         },
         onSpjsName: function(spjsName) {
-            $('.com-chilipeppr-widget-serialport .panel-heading .hosttitle').text(spjsName);
+            $('.com-pymonster-widget-pymonster .panel-heading .hosttitle').text(spjsName);
         },
         setupCloudServers: function() {
             
             // make everything clickable
-            $('.com-chilipeppr-widget-serialport-body .cloud-card').click(this.onCloudServerClick.bind(this));
+            $('.com-pymonster-widget-pymonster-body .cloud-card').click(this.onCloudServerClick.bind(this));
             
         },
         onCloudServerClick: function(evt) {
@@ -805,14 +805,14 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             this.wsConnect(wsUrl);
         },
         showBufferEncouragement: function() {
-            $('.com-chilipeppr-widget-serialport-bufferindicator').removeClass('hidden');
+            $('.com-pymonster-widget-pymonster-bufferindicator').removeClass('hidden');
         },
         hideBufferEncouragement: function() {
-            $('.com-chilipeppr-widget-serialport-bufferindicator').addClass('hidden');
+            $('.com-pymonster-widget-pymonster-bufferindicator').addClass('hidden');
         },
         bufferEncouragement: function(list, arg2) {
             console.log("got bufferEncouragement port list:", list, "arg2:", arg2);
-            //$('.com-chilipeppr-widget-serialport-bufferindicator').addClass('hidden');
+            //$('.com-pymonster-widget-pymonster-bufferindicator').addClass('hidden');
             // see if we're being asked to show a default buffer. if we are then we need
             // to analayze the current port list to see if anything is open with that buffer
             // set. if it is we can hide the encouragement msg. if it's not, we should show the msg
@@ -848,25 +848,25 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     }
                 });
             }
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/recvSingleSelectPort", port);
+            chilipeppr.publish("/com-pymonster-widget-pymonster/recvSingleSelectPort", port);
         },
         onRemoteHostConnect: function() {
             console.log("onRemoteHostConnect");
-            var host = $('#com-chilipeppr-widget-serialport-host').val();
-            $('#com-chilipeppr-widget-serialport-hostconnectmsg').html(
+            var host = $('#com-pymonster-widget-pymonster-host').val();
+            $('#com-pymonster-widget-pymonster-hostconnectmsg').html(
                 "Trying to connect to " +
-                $('#com-chilipeppr-widget-serialport-host').val() + "...");
+                $('#com-pymonster-widget-pymonster-host').val() + "...");
             this.wsConnect(host, function() {
-                $('#com-chilipeppr-widget-serialport-hostconnectmsg').html("Last connect successful.");
+                $('#com-pymonster-widget-pymonster-hostconnectmsg').html("Last connect successful.");
             }, function() {
-                $('#com-chilipeppr-widget-serialport-hostconnectmsg').html("Failed to connect to host.");
+                $('#com-pymonster-widget-pymonster-hostconnectmsg').html("Failed to connect to host.");
             });
         },
         setSingleSelectMode: function() {
             this.isSingleSelectMode = true;
             //var ver = " v" + this.version;
             //if (this.version == null) ver = "";
-            $('.com-chilipeppr-widget-serialport .panel-heading .subtitle').html('Single Port Mode');            
+            $('.com-pymonster-widget-pymonster .panel-heading .subtitle').html('Single Port Mode');            
             this.singleSelectPort = $.cookie("singleSelectPort");
             console.log("setSingleSelectMode. port:", this.singleSelectPort);
         },
@@ -890,39 +890,39 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             var that = this;
             
             /*
-            $('.com-chilipeppr-widget-serialport .btn').tooltip({
+            $('.com-pymonster-widget-pymonster .btn').tooltip({
                 animation: true,
                 delay: 100,
                 //container: 'body'
             });
             */
-            $('.com-chilipeppr-widget-serialport .btn').popover({
+            $('.com-pymonster-widget-pymonster .btn').popover({
                 animation: true,
                 delay: 100,
                 //container: 'body'
             });
             
-            $('.com-chilipeppr-widget-serialport .btn.refresh').click(function () {
-                $('.com-chilipeppr-widget-serialport-disconnected .refresh').prop('disabled', true);
+            $('.com-pymonster-widget-pymonster .btn.refresh').click(function () {
+                $('.com-pymonster-widget-pymonster-disconnected .refresh').prop('disabled', true);
                 that.getPortList();
             });
-            $('#com-chilipeppr-widget-serialport-tbar-showhideconsole').click(
+            $('#com-pymonster-widget-pymonster-tbar-showhideconsole').click(
                 this.consoleToggle.bind(this)
             );
-            $('#com-chilipeppr-widget-serialport-tbar-showhidestatus').click(
+            $('#com-pymonster-widget-pymonster-tbar-showhidestatus').click(
                 this.statusToggle.bind(this)
             );
-            $('#com-chilipeppr-widget-serialport-tbar-refresh').click(function () {
+            $('#com-pymonster-widget-pymonster-tbar-refresh').click(function () {
                 that.getPortList();
             });
-            $('#com-chilipeppr-widget-serialport-tbar-reconws').click(function () {
+            $('#com-pymonster-widget-pymonster-tbar-reconws').click(function () {
                 that.wsConnect();
             });
-            $('#com-chilipeppr-widget-serialport-tbar-disconws').click(this.disconnect.bind(this));
-            $('.com-chilipeppr-widget-serialport .btn.disconnect').click(this.disconnect.bind(this));
+            $('#com-pymonster-widget-pymonster-tbar-disconws').click(this.disconnect.bind(this));
+            $('.com-pymonster-widget-pymonster .btn.disconnect').click(this.disconnect.bind(this));
             
             // the new restart command
-            $('.com-chilipeppr-widget-serialport .btn.spjs-restart').click(function () {
+            $('.com-pymonster-widget-pymonster .btn.spjs-restart').click(function () {
                 that.restartSpjs();
             });
             
@@ -941,12 +941,12 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             console.log("closing websocket:", this.conn);
             if (this.conn) {
                 this.conn.close();
-                $('.com-chilipeppr-widget-serialport-install').removeClass('hidden');
+                $('.com-pymonster-widget-pymonster-install').removeClass('hidden');
             }
         },
         consoleToggle: function() {
-            var con = $('.com-chilipeppr-widget-serialport-console');
-            var coni = $('.com-chilipeppr-widget-serialport-consoleinput');
+            var con = $('.com-pymonster-widget-pymonster-console');
+            var coni = $('.com-pymonster-widget-pymonster-consoleinput');
             if (con.hasClass('hidden')) {
                 // the console is hidden, so let's show
                 con.removeClass('hidden');
@@ -961,7 +961,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             
         },
         statusToggle: function() {
-            var stat = $('.com-chilipeppr-widget-serialport-status');
+            var stat = $('.com-pymonster-widget-pymonster-status');
             if (stat.hasClass('hidden')) {
                 // the status is hidden, so let's show
                 stat.removeClass('hidden');
@@ -993,14 +993,14 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             });
 
             var that = this;
-            $("#com-chilipeppr-widget-serialport-consoleform").submit(function (evt) {
+            $("#com-pymonster-widget-pymonster-consoleform").submit(function (evt) {
                 evt.preventDefault();
                 
                 console.log("got submit on form");
                 if (!that.isWsConnected) {
                     return false;
                 }
-                var msg = $('#com-chilipeppr-widget-serialport-consoleform input');
+                var msg = $('#com-pymonster-widget-pymonster-consoleform input');
                 if (!msg.val()) {
                     return false;
                 }
@@ -1026,7 +1026,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             });
             
             // show history by letting user do up/down arrows
-            $("#com-chilipeppr-widget-serialport-consoleform").keydown(function(evt) {
+            $("#com-pymonster-widget-pymonster-consoleform").keydown(function(evt) {
                 //console.log("got keydown. evt.which:", evt.which, "evt:", evt);
                 if (evt.which == 38) {
                     // up arrow
@@ -1038,7 +1038,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                         that.historyLastShownIndex = 0;
                         return;
                     }
-                    $("#com-chilipeppr-widget-serialport-consoleform input").val(that.history[that.historyLastShownIndex]);
+                    $("#com-pymonster-widget-pymonster-consoleform input").val(that.history[that.historyLastShownIndex]);
                 } else if (evt.which == 40) {
                     if (that.historyLastShownIndex == null)
                         return;
@@ -1047,10 +1047,10 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     if (that.historyLastShownIndex >= that.history.length) {
                         console.log("out of history to show. down arrow.");
                         that.historyLastShownIndex = that.history.length;
-                        $("#com-chilipeppr-widget-serialport-consoleform input").val("");
+                        $("#com-pymonster-widget-pymonster-consoleform input").val("");
                         return;
                     }
-                    $("#com-chilipeppr-widget-serialport-consoleform input").val(that.history[that.historyLastShownIndex]);
+                    $("#com-pymonster-widget-pymonster-consoleform input").val(that.history[that.historyLastShownIndex]);
                 }
             });
 
@@ -1065,7 +1065,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                 return;
             }
             
-            if (this.log == null) this.log = $('.com-chilipeppr-widget-serialport-console-log');
+            if (this.log == null) this.log = $('.com-pymonster-widget-pymonster-console-log');
             var log = this.log;
             var d = log[0];
             var doScroll = d.scrollTop == d.scrollHeight - d.clientHeight;
@@ -1099,8 +1099,8 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             //console.log("appendLog. msg:", msg);
             if (this.logEls.log == null) {
                 console.log("lazy loading logEls. logEls:", this.logEls);
-                this.logEls.log = $('.com-chilipeppr-widget-serialport-console-log pre');
-                this.logEls.logOuter = $('.com-chilipeppr-widget-serialport-console-log');
+                this.logEls.log = $('.com-pymonster-widget-pymonster-console-log pre');
+                this.logEls.logOuter = $('.com-pymonster-widget-pymonster-console-log');
             }
             //console.log("logEls:", this.logEls);
             //console.log(this.logEls.logOuter);
@@ -1510,12 +1510,12 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             }
         },
         reconMsgShow: function() {
-            $('.com-chilipeppr-widget-serialport-disconnected').removeClass('hidden');
+            $('.com-pymonster-widget-pymonster-disconnected').removeClass('hidden');
             // undisable the reconnect btn
-            $('.com-chilipeppr-widget-serialport-disconnected .refresh').prop('disabled', false);
+            $('.com-pymonster-widget-pymonster-disconnected .refresh').prop('disabled', false);
         },
         reconMsgHide: function() {
-            $('.com-chilipeppr-widget-serialport-disconnected').addClass('hidden');
+            $('.com-pymonster-widget-pymonster-disconnected').addClass('hidden');
         },
         wsWasEverConnected: false,
         wsConnect: function (hostname, onsuccess, onfail) {
@@ -1624,9 +1624,9 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     subnet = "192.168.1.";
                 var scancntsuccess = 0;
                 var scancnterr = 0;
-                var cnt = $('#com-chilipeppr-widget-serialport-scanresultcnt');
+                var cnt = $('#com-pymonster-widget-pymonster-scanresultcnt');
                 cnt.text("Starting scan of " + subnet + "*");
-                $('#com-chilipeppr-widget-serialport-scanresult').html("");
+                $('#com-pymonster-widget-pymonster-scanresult').html("");
                 var ctr2 = 1; // keep 2nd ctr so we can increment inside the settimeout
                 for (var ctr = 1; ctr < 255; ctr++) {
                 //for (var ctr = 1; ctr <= 26; ctr++) {
@@ -1644,7 +1644,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                         console.log("got click. evt:", evt, "data:", evt.data);
                         that.wsConnect(evt.data);
                       });
-                      $('#com-chilipeppr-widget-serialport-scanresult').append(server);
+                      $('#com-pymonster-widget-pymonster-scanresult').append(server);
                       that.el = server;
                       var that2 = this;
                       setTimeout(function() { 
@@ -1693,11 +1693,11 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
           var serverList = this.serverListGet();
           serverList[key] = val;
           var txt = JSON.stringify(serverList);
-          localStorage.setItem("com-chilipeppr-widget-serialport-serverList", txt);
+          localStorage.setItem("com-pymonster-widget-pymonster-serverList", txt);
           console.log("serverList:", serverList, "txt:", txt);
           },
         serverListGet: function() {
-          var serverList = localStorage.getItem("com-chilipeppr-widget-serialport-serverList");
+          var serverList = localStorage.getItem("com-pymonster-widget-pymonster-serverList");
           console.log("got localStorage item:", serverList);
           if (serverList) {
           	serverList = JSON.parse(serverList);
@@ -1881,7 +1881,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             if (this.isSingleSelectMode) {
                 console.log("got port open but in single select mode.");
                 // hilite this port
-                $('.com-chilipeppr-widget-serialport-portlist > tbody > tr').removeClass("success");
+                $('.com-pymonster-widget-pymonster-portlist > tbody > tr').removeClass("success");
                 $('#' + portname + "Row").addClass("success");
                 this.singleSelectPort = data.Port;
                 // save cookie, but let path be to this workspace so other workspaces using this
@@ -1906,7 +1906,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             // only send this config info like 1 second later
             var that = this;
             setTimeout(function() {
-                chilipeppr.publish("/com-chilipeppr-widget-serialport/jsonSend", {Id:"startup" +  that.configSendCtr++, D:script});
+                chilipeppr.publish("/com-pymonster-widget-pymonster/jsonSend", {Id:"startup" +  that.configSendCtr++, D:script});
             }, 3000);
             
             console.groupEnd();
@@ -2167,7 +2167,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             this.portlist = portlist;
             
             // publish the port list for other listeners
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/list", portlist);
+            chilipeppr.publish("/com-pymonster-widget-pymonster/list", portlist);
 
             // now build the UI
             
@@ -2205,7 +2205,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     var availArgsHtml = "";
                     if ('AvailableBufferAlgorithms' in item) {
                         // we are on a version of the server that gives us this
-                        availArgsHtml = "<td><select id=\"" + i + "Buffer\" class=\"com-chilipeppr-widget-serialport-buffer\" class=\"form-control\">";
+                        availArgsHtml = "<td><select id=\"" + i + "Buffer\" class=\"com-pymonster-widget-pymonster-buffer\" class=\"form-control\">";
                         //availArgsHtml += "<option></option>"
                         item.AvailableBufferAlgorithms.forEach(function(alg) {
                             //console.log("algorithm:", alg);
@@ -2294,7 +2294,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                         availArgsHtml +
                         //"<td>" + 
                         //"<br>" +
-                        "<select id=\"" + i + "Baud\" class=\"com-chilipeppr-widget-serialport-baud\" class=\"form-control\">" +
+                        "<select id=\"" + i + "Baud\" class=\"com-pymonster-widget-pymonster-baud\" class=\"form-control\">" +
                         that.getBaudRates() +
                         "</select>" + 
                         "</td>" +
@@ -2321,7 +2321,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                 html = '<div class="alert alert-danger" style="margin-bottom:0;">No serial ports found on your Serial Port JSON Server.</div>';
             }
             html = htmlFirst + html;
-            $('.table.com-chilipeppr-widget-serialport-portlist tbody').html(html);
+            $('.table.com-pymonster-widget-pymonster-portlist tbody').html(html);
             
             console.log("about to do baud/buffer override for isopen, cookie, meta, etc");
             $.each(portlist, function (i, item) {
@@ -2392,7 +2392,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     if (that.versionFloat >= 1.4) {
                         console.log("adding buffer bar");
                         $('#' + i + "Buffer").parent().append(
-                            '<div class="progress hidden com-chilipeppr-widget-serialport-progbar">' +
+                            '<div class="progress hidden com-pymonster-widget-pymonster-progbar">' +
                             '<div id="' + i + 'BufferProgBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width: 80%;">' +
                             '    <span class="" style="min-width:20px;padding-left:3px;">Unknown</span>' +
                             '</div>' +
@@ -2402,7 +2402,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                     // if isInitting then fire off fake onportopen signals
                     // as if user just opened this port
                     if (that.isInitting) {
-                        chilipeppr.publish("/com-chilipeppr-widget-serialport/onportopen", item);
+                        chilipeppr.publish("/com-pymonster-widget-pymonster/onportopen", item);
                     }
                 }
                 
@@ -2446,27 +2446,27 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             this.showAllPopovers();
             
             // publish the port list for other listeners
-            chilipeppr.publish("/com-chilipeppr-widget-serialport/listAfterMetaDataAdded", portlist);
+            chilipeppr.publish("/com-pymonster-widget-pymonster/listAfterMetaDataAdded", portlist);
 
             console.groupEnd();
             
         },
         showAllPopovers: function() {
-            $('.com-chilipeppr-widget-serialport .btn').popover({
+            $('.com-pymonster-widget-pymonster .btn').popover({
                 animation: true,
                 delay: 100,
                 //container: 'body'
             });
         },
         hideAllPopovers: function() {
-            $('.com-chilipeppr-widget-serialport .btn').popover('hide');
+            $('.com-pymonster-widget-pymonster .btn').popover('hide');
         },
         onPortSetDefaultClicked: function(evt) {
             console.log("set default btn clicked for evt.data:", evt.data, "this.conn:", this.conn);
         
             // hilite this port
             var data = evt.data;
-            $('.com-chilipeppr-widget-serialport-portlist > tbody > tr').removeClass("success");
+            $('.com-pymonster-widget-pymonster-portlist > tbody > tr').removeClass("success");
             $('#' + data.rowName + "Row").addClass("success");
             this.singleSelectPort = data.port.Name;
             
@@ -2784,7 +2784,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             //this.publishSysMsg("Serial port ajax connection opened at " + this.conn.url + ", readyState: " + this.conn.readyState);
             
             // no longer hiding cuz in its own tab
-            //$('.com-chilipeppr-widget-serialport-install').addClass('hidden');
+            //$('.com-pymonster-widget-pymonster-install').addClass('hidden');
             
             // 
             
@@ -2794,10 +2794,10 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             $(window).trigger('resize'); 
             
             // show the "Port List" tab
-            $('a[href=#com-chilipeppr-widget-serialport-portstab]').tab('show');
+            $('a[href=#com-pymonster-widget-pymonster-portstab]').tab('show');
             
             // hide the warning
-            $('#com-chilipeppr-widget-serialport .spjs-notconnectedwarning').addClass("hidden");
+            $('#com-pymonster-widget-pymonster .spjs-notconnectedwarning').addClass("hidden");
             
         },
         onWsDisconnect: function (event) {
@@ -2811,14 +2811,14 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
                 "readyState: " + this.conn.readyState);
             
             // show the warning
-            $('#com-chilipeppr-widget-serialport .spjs-notconnectedwarning').removeClass("hidden");
+            $('#com-pymonster-widget-pymonster .spjs-notconnectedwarning').removeClass("hidden");
 
         },
         statusWatcher: function () {
             // This method subscribes to "/ws/sys" and updates the UI with
             // the latest msg
             chilipeppr.subscribe("/" + this.id + "/ws/sys", this, function (msg) {
-                $('.com-chilipeppr-widget-serialport-status .well.well-sm').text(msg);
+                $('.com-pymonster-widget-pymonster-status .well.well-sm').text(msg);
             });
         },
         initBody: function(evt) {
@@ -2851,7 +2851,7 @@ chilipeppr.publish("/com-chilipeppr-widget-serialport/send", "G1 X10 F500\\n");
             if (!(evt == null)) localStorage.setItem("/" + this.id + "/body", "hidden");
         },
         forkSetup: function () {
-            var topCssSelector = '.com-chilipeppr-widget-serialport';
+            var topCssSelector = '.com-pymonster-widget-pymonster';
             //$(topCssSelector + ' .fork').prop('href', this.fiddleurl);
             //$(topCssSelector + ' .standalone').prop('href', this.url);
             //$(topCssSelector + ' .fork-name').html(this.id);
