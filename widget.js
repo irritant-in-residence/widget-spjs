@@ -1,5 +1,5 @@
 /* global requirejs cprequire cpdefine chilipeppr */
-// Defining the globals above helps Cloud9 not show warnings for those variables
+// Defining the globals above helps Cloud9 not show warnings for those variables -- Cloud9 sucks as a dev platform now that it is part of AWS.  Use JetBrains instead, far superior.
 
 // ChiliPeppr Widget/Element Javascript
 
@@ -146,13 +146,14 @@ cprequire_test(["inline:com-pymonster-widget-pymonster"], function (sp) {
 cpdefine("inline:com-pymonster-widget-pymonster", ["chilipeppr_ready", "jquerycookie"], function () {
     return {
         id: "com-pymonster-widget-pymonster",
-        name: "Widget / Serial Port JSON Server",
-        desc: "The essential widget if you want your workspace to talk to the Serial Port JSON Server (SPJS). This widget enables numerous pubsub signals so you can publish to SPJS and receive data back when you subscribe to the appropriate signals.",
+        name: "Widget / Serial Port JSON Server for PYMonster ",
+        desc: "The essential widget if you want your workspace to talk to the PYMonster. This widget enables numerous pubsub signals so you can publish to SPJS and receive data back when you subscribe to the appropriate signals.",
         url: "(auto fill by runme.js)",       // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
         fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
         githuburl: "(auto fill by runme.js)", // The backing github repo
         testurl: "(auto fill by runme.js)",   // The standalone working widget so can view it working by itself
         publish: {
+            // todo: PROBABLY need to trim this list.
             '/list' : "Sends the list of serial ports shown in this widget including the connect state so other widgets/elements in ChiliPeppr can use the list including knowing what serial ports to send/recv from. Send in /getList and get back a /list with the JSON payload of the list.", 
             '/listAfterMetaDataAdded' : "Similar to /list but the list will have meta data added to it like an image, or default baud rates, or a modified friendly name. It may even be marked as deleted for dual port scenarios where a port may be considered the 2nd port.", 
             '/ws/onconnect' : 'When the websocket connects. This widget currently supports only a single websocket. In the future, multiple websockets will be supported and a ws identifier will be attached. For now, you will receive the string "connected" in the payload. The 2nd parameter will be the websocket in case you need it like to retrieve the IP address of SPJS. For multiple websockets an additional parameter will be published with the ws:// url',

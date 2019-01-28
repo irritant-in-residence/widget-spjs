@@ -1,9 +1,11 @@
 # com-pymonster-widget-pymonster
-The essential widget if you want your workspace to talk to the Serial Port JSON Server (SPJS). This widget enables numerous pubsub signals so you can publish to SPJS and receive data back when you subscribe to the appropriate signals.
+The essential widget if you want your workspace to talk to the PYMonster™. 
+This widget enables TinyG workspace access to the hardware.
+We will also use it to connect to the P4SE pendant.
 
 ![alt text](screenshot.png "Screenshot")
 
-## ChiliPeppr Widget / Serial Port JSON Server
+## ChiliPeppr Widget / Serial Port JSON Server for PYMonster
 
 All ChiliPeppr widgets/elements are defined using cpdefine() which is a method
 that mimics require.js. Each defined object must have a unique ID so it does
@@ -12,7 +14,7 @@ not conflict with other ChiliPeppr widgets.
 | Item                  | Value           |
 | -------------         | ------------- | 
 | ID                    | com-pymonster-widget-pymonster |
-| Name                  | Widget / Serial Port JSON Server |
+| Name                  | Widget / Serial Port JSON Server for PYMonster |
 | Description           | The essential widget if you want your workspace to talk to the Serial Port JSON Server (SPJS). This widget enables numerous pubsub signals so you can publish to SPJS and receive data back when you subscribe to the appropriate signals. |
 | chilipeppr.load() URL | http://raw.githubusercontent.com/https://master/auto-generated-widget.html |
 | Edit URL              | http://ide.c9.io/undefined/undefined |
