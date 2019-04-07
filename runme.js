@@ -23,6 +23,7 @@ var mimeTypes = {
   "css": "text/css"
 };
 
+
 http.createServer(function(req, res) {
 
   var uri = url.parse(req.url).pathname;
@@ -154,7 +155,13 @@ http.createServer(function(req, res) {
     
   }
 
+  console.log(process.env.PORT);
+
 }).listen(process.env.PORT);
+
+console.log(process.env.PORT);
+console.log("BOO");
+
 
 String.prototype.regexIndexOf = function(regex, startpos) {
     var indexOf = this.substring(startpos || 0).search(regex);
@@ -1336,3 +1343,4 @@ var getGithubUrl = function(callback) {
   return ret;
     
 }
+
